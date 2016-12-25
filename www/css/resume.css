@@ -222,6 +222,33 @@ a:hover.button-small, a:active.button-small{
     background: #ff0084;;
 }
 
+a.button-here {
+    font-size: 0.7em;
+    font-weight: bold;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    padding: 0px 3px 1px 3px;
+    text-decoration: none;
+    vertical-align: 6%;
+    border: 1px solid #0073ea;
+    font-variant: small-caps;
+    color: #0073ea;
+}
+a:hover.button-here, a:active.button-here{
+    color: #ffffff;
+    background: #ff0084;
+    border-color: transparent;
+}
+
+a.button-head {
+    text-decoration: none;
+}
+
+a:hover.button-head, a:active.button-head{
+    color: #888888;
+    text-decoration: none;
+}
 
 
 

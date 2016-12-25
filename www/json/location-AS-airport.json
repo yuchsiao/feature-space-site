@@ -1,0 +1,206 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "新千歳空港 New Chitose Airport (CTS)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    42.9569418,141.8386488
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "函館機場 Hakodate Airport (HKD)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.7754255,140.7784681
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "大阪国際空港 Osaka International Airport (ITM)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    34.6919509,135.1470207
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "成田国際空港 Narita International Airport (NRT)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.7724032,140.3826882
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "羽田空港 Haneda Airport (HND)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.5456349,139.7904061
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "松山機場 Taipei Songshan Airport (TSA)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    25.066915,121.5533604
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "Taiwan Taoyuan International Airport (TPA)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    25.0791102,121.2335235
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "高雄國際航空站 Kaohisung International Airport (KHH)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.5740903,120.3449554
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "香港國際機場 Hong Kong International Airport (HKG)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.3071249,113.9191257
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "寧波櫟社國際機場 Ningbo Lishe International Airport (NBG)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    29.8266667,121.4619444
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "長沙黃花國際機場 Changsha Huanghua International Airport (CSX)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.1966667,113.2208333
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "仁川國際空港 Incheon International Airport (ICN)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.544959,126.4975685
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        }
+    ]
+}

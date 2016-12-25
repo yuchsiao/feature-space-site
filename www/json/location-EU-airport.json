@@ -1,0 +1,132 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sheremetyevo International Airport (SVO)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    55.9723019,37.4127428
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Turin Airport (TRN)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    45.2005164,7.6512129
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Munich International Airport (MUC)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    48.353677,11.7859278
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Frankfurt Airport (FRA)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    50.0269426,8.5461225
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Leonardo da Vinci International Airport (FCO)",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.8615555,12.2336861
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        }
+
+    ]
+}

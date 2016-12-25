@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+
+    <script src="//maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script src="js/jquery-1.11.1.min.js"></script>-->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <!--<script src="js/d3.min.js"></script>-->
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <!--<script src="js/queue.v1.min.js"></script>-->
+
+
+    <script src="js/colorbrewer.js"></script>
+    <script src="js/nearby.js"></script>
+
+    <style>
+        html, body {
+            /*width: 100%;*/
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .trademark {
+            /*font-family: 'Aclonica', sans-serif;*/
+            font-family: 'Varela Round', sans-serif;
+            font-size: 20px;
+            font-wight: 400;
+            color: #00dfb2;
+            /*text-shadow: 0.3px 0.3px 0.3px #000000;*/
+            padding: 0px 4px 0px 4px;
+        }
+        #trademark-container {
+            position: absolute;
+            top: 5px;
+            left: 0%;
+            margin-left: 80px;
+            z-index: 5;
+            background-color: #fff;
+            padding: 2px 7px 5px 7px;
+            /*border: 1px solid #aaaaaa;*/
+            font-family: source sans pro, sans-serif;
+            font-weight: 400;
+            -moz-border-radius: 9px;
+            -webkit-border-radius: 9px;
+            border-radius: 9px; /* future proofing */
+            -khtml-border-radius: 9px; /* for old Konqueror browsers */
+            opacity: 0.7;
+        }
+        #panel {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            margin-left: -290px;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px 7px 5px 7px;
+            /*padding-bottom: 5px;*/
+            /*padding-left: 9px;*/
+            /*padding-right: 9px;*/
+            border: 1px solid #aaaaaa;
+            font-family: source sans pro, sans-serif;
+            font-weight: 400;
+            -moz-border-radius: 9px;
+            -webkit-border-radius: 9px;
+            border-radius: 9px; /* future proofing */
+            -khtml-border-radius: 9px; /* for old Konqueror browsers */
+        }
+        #panel span {
+            margin-left: 4px;
+        }
+        select {
+            font-family: source sans pro, sans-serif;
+            font-weight: 400;
+        }
+        #map {
+            /*display: inline-block;*/
+            /*float: left;*/
+            /*width: 60%;*/
+            height: 100%;
+        }
+
+        #animation-effect {
+            width: 100%;
+            height: 100%;
+        }
+
+        #attraction svg {
+            position: absolute;
+            /*width: 23px;*/
+            /*height: 36px;*/
+            /*padding-right: 100px;*/
+            font: 10px sans-serif;
+        }
+
+        #animation-effect svg{
+            position: absolute;
+        }
+
+        .marker-circle {
+            fill: brown;
+            stroke: black;
+            stroke-width: 1.5px;
+            opacity: 0.5;
+        }
+
+        .marker-ring {
+            fill: none;
+            stroke: black;
+            stroke-width: 0.5px;
+            opacity: 0.5;
+            /*box-shadow: 100px 100px 50px #000000;*/
+        }
+
+        #current-location {
+            cursor: pointer;
+        }
+
+        .duration-line {
+            position: absolute;
+        }
+        .duration-circle {
+            position: absolute;
+            cursor: pointer;
+        }
+        /*.tick-ring{*/
+            /*position: absolute;*/
+        /*}*/
+
+        .infowindow-title {
+            font-weight: 900;
+        }
+    </style>
+
+    <title>Nearby</title>
+</head>
+
+<body>
+<!--<div id="trademark-container" class="trademark">-->
+    <!--nearby-->
+<!--</div>-->
+<div id="panel">
+    <span>City:</span>
+    <select id="panel-city" onchange="trigger();">
+        <option value="http://www.tripadvisor.com/Attractions-g60745-Activities-Boston_Massachusetts.html">Boston</option>
+        <option value="http://www.tripadvisor.com/Attractions-g35805-Activities-Chicago_Illinois.html">Chicago</option>
+        <option value="http://www.tripadvisor.com/Attractions-g60713-Activities-San_Francisco_California.html">San Francisco</option>
+    </select>
+    <span>Category:</span>
+    <select id="panel-category" onchange="trigger()">
+        <option value="">All</option>
+        <option value="c50-">Cultural</option>
+        <option value="c47-">Landmarks</option>
+        <option value="c49-">Museums</option>
+        <option value="c45-">Outdoors</option>
+    </select>
+    <span>By:</span>
+    <select id="panel-mode" onchange="trigger()">
+        <option value="driving">Driving</option>
+        <option value="transit">Transit</option>
+        <option value="walking">Walking</option>
+        <option value="bicycling">Bicycling</option>
+    </select>
+    <span>Location:</span>
+    <select id="panel-location" onchange="trigger()">
+        <option value="emulated">Emulated</option>
+        <option value="current">Current</option>
+    </select>
+</div>
+
+<div id="map-canvas"></div>
+
+<div id="map"></div>
+</body>
+
+<script>
+// Style setup
+function init() {
+     window.styleMapMarker = {
+        firstTime: {
+            flag: true,
+            transitionDuration: 250,
+            dropInterval: 5,
+            dropDistance: 25,
+            dropEffect: "circle"
+        },
+        strokeWidth: "25px",
+        eyeColor: "#ffffff",// "#fafafa",
+        padding: 1,
+        svgHeight: 0,  // updated below in main
+        svgWidth: 0,  // updated below in main
+        svgCx: 0,  // updated below in main
+        svgCy: 0,  // updated below in main
+        height: 32,
+        ratio: 0,  // updated below in main
+        width: 0,  // updated below in main
+        opacity: 0.2,
+        blink: {
+            duration: 150,
+            interval: 15000,
+            ratio: 0.1
+        },
+        calibrationDuration: 800,
+        currentLocation: {
+            flag: true,
+            lat: 0,  // to be updated
+            lng: 0,  // to be updated
+            accuracy: 0, // to be updated
+            auraRadius: 1,
+            maximumAge: 60000,
+            flagReady: false,
+            svgHeight: 0,  // updated below in main
+            svgWidth: 0,  // updated below in main
+            iconHeight: 48,
+            ratio: 0,  // updated below in main
+            iconWidth: 0,  // updated below in main
+            baseR: 4,
+            gap: 1,
+            color: "#225ea8",
+            auraColor: "#7fcdbb",
+            auraStrokeColor: "#1d91c0",
+            auraPadding: 5,
+            intervalID: 0,  // updated later
+            animationInterval: 2500,
+            totalHeight: function () {
+                return this.iconHeight + this.gap + this.baseR * 2;
+            },
+            totalWidth: function () {
+                return this.iconWidth;
+            }
+        },
+        flagUpdate: false // true
+    };
+    window.nearby = {
+        parameters: {
+            directions: {
+                interval: 600,
+                transitFactor: 6
+            },
+            data: {
+                number: 15
+            },
+            travelMode: "bicycling",
+            maxTimeDistanceRatio: -Infinity,  // init value
+            maxDuration: -Infinity,
+            timeTicks: [5 * 60, 15 * 60, 30 * 60, 120 * 60, 240 * 60].reverse(),
+            timeTicksInDistance: []
+        },
+        style: {
+            line: {
+                width: 1.5, //3
+                dash: "0.5, 1.5" //1,1 //"10,1,2,1"
+            },
+            durationCircle: {
+                radius: 5,
+                strokeWidth: 4,
+                color: "#ffffff",
+                radiusScale: d3.scale.pow(3).domain([1, 15]).range([0.5, 2])
+            },
+            tickRing: {
+                strokeWidth: 3,
+                strokeColor: "white", //"#253494",
+                color: "#33CCFF", //"#1d91c0",
+                opacity: 0.25,
+                colorScale: 0  // to be initialized
+            }
+        },
+        signals: {
+            durationCircleReady: false,
+            setCenterAlready: false
+        }
+    };
+}
+
+var nearbyDurations = [];
+var nearbyDirectionIntervalId;
+var overlay;
+var taMapObject;
+var map;
+
+
+$(document).ready(function(){
+
+//    "http://www.tripadvisor.com/Attractions-g60745-Activities-Boston_Massachusetts.html";
+//        url = "http://www.tripadvisor.com/Attractions-g60713-Activities-San_Francisco_California.html";
+
+    window.trigger = function() {
+
+        init();
+
+        var yql = "https://query.yahooapis.com/v1/public/yql?q=";
+        var cityDOM = document.getElementById("panel-city");
+        var url = cityDOM.value;
+        var category = document.getElementById("panel-category").value;
+        var index = url.lastIndexOf("-");
+        url = url.slice(0,index) + category + url.slice(index);
+        var mode = document.getElementById("panel-mode").value;
+        var locationMode = document.getElementById("panel-location").value;
+        var lat, lng;
+
+        if (locationMode == "emulated") {
+            styleMapMarker.currentLocation.flag = false;
+            styleMapMarker.currentLocation.flagReady = false;
+
+            switch(cityDOM.options[cityDOM.selectedIndex].text) {
+                case "Boston":
+                    lat = 42.3591317;
+                    lng =-71.0950827;
+                    break;
+                case "Chicago":
+                    lat = 41.8674422;
+                    lng =-87.6260473;
+                    break;
+                case "San Francisco":
+                    lat = 37.7810396;
+                    lng =-122.4154557;
+                    break;
+            }
+            styleMapMarker.currentLocation.lat = lat;
+            styleMapMarker.currentLocation.lng = lng;
+            styleMapMarker.currentLocation.accuracy = 50;
+        }
+        else {
+            styleMapMarker.currentLocation.flag = true;
+            styleMapMarker.currentLocation.flagReady = false;
+        }
+
+        var yqlQuery = yql+getQueryCommand("*", url, "//script | //span[@class='pgCount']");
+
+        // Resource
+        var urlMapMarkerIcon = "icons/red-pin.svg";
+        var urlMapLocationIcon = "icons/hand105.svg"
+
+        // Fetch site data from TripAdvisor and load icons
+        queue() .defer(d3.json, yqlQuery)
+                .defer(d3.html, urlMapMarkerIcon)
+                .defer(d3.html, urlMapLocationIcon)
+                .await(main);
+
+    }
+    trigger();
+});
+
+
+
+$(window).unload(function(){
+    styleMapMarker.currentLocation.flagReady = false;
+});
+
+function main(error, jsonTripAdvisor, svgMarker, svgHand) {
+    if (error) {
+        return console.warn(error);
+    }
+
+    // Update styleMapMarker
+    styleMapMarker.svgHeight = parseInt(d3.select(svgMarker).select("svg").attr("height"));  // 1694
+    styleMapMarker.svgWidth  = parseInt(d3.select(svgMarker).select("svg").attr("width"));   // 1047
+    styleMapMarker.ratio = styleMapMarker.height/styleMapMarker.svgHeight;
+    styleMapMarker.width = Math.ceil(styleMapMarker.svgWidth * styleMapMarker.ratio);
+    styleMapMarker.svgCx = d3.select(svgMarker).select("svg").select("circle").attr("cx");
+    styleMapMarker.svgCy = d3.select(svgMarker).select("svg").select("circle").attr("cy");
+
+    styleMapMarker.currentLocation.svgHeight = parseInt(d3.select(svgHand).select("svg").attr("height"));
+    styleMapMarker.currentLocation.svgWidth  = parseInt(d3.select(svgHand).select("svg").attr("width"));
+    styleMapMarker.currentLocation.ratio     = styleMapMarker.currentLocation.iconHeight/styleMapMarker.currentLocation.svgHeight;
+    styleMapMarker.currentLocation.iconWidth = Math.ceil(styleMapMarker.currentLocation.svgWidth
+            * styleMapMarker.currentLocation.ratio);
+
+    // Parse TripAdvisor Data
+    taMapObject = cleanUpTaData(jsonTripAdvisor);
+    taMapObject.attractionMapMarkers.splice(nearby.parameters.data.number);
+
+    //**DEBUG
+    console.log(taMapObject);
+    //*******
+
+    createMap(taMapObject, svgMarker, svgHand, styleMapMarker);
+
+}
+
+
+function log(h) {
+    document.getElementById("log").innerHTML += h + "<br>";
+}
+
+function pr(h) {
+    console.log(h);
+}
+
+function getQueryCommand(select, url, xpath) {
+    return encodeURIComponent("select " + select + " from html where url=\""
+            + url + "\" and xpath=\""
+            + xpath + "\"")+"&format=json&callback=";
+}
+
+function cleanUpTaData(json) {
+
+    // Search for the relevant part
+    var flagFound = false;
+    var taMapScript = "";  // ta for TripAdvisor
+    var taMapScriptBeginsWith = "RESET_MAP_POSITION";
+    for (var i=0; i<json.query.results.script.length; ++i) {
+        taMapScript = json.query.results.script[i].content;
+        if (taMapScript) {
+            taMapScript = taMapScript.trim();
+            if (taMapScript.substr(0,taMapScriptBeginsWith.length)==taMapScriptBeginsWith) {
+                flagFound = true;
+                break;
+            }
+        }
+    }
+    if (!flagFound) {
+        return console.warn("Cannot find the corresponding map info");
+    }
+
+    // Generate Js object
+    var taMapScriptArray = taMapScript.split(";");
+    var taMapObject = {};
+    taMapObject.resetMapPosition  = eval(taMapScriptArray[0]);
+    taMapObject.initialMapPosition = eval(taMapScriptArray[1]);
+    taMapObject.attractionMapMarkers = eval(taMapScriptArray[2]);
+
+    // Flatten customHover
+    for (var i=0; i<taMapObject.attractionMapMarkers.length; ++i) {
+        var obj = taMapObject.attractionMapMarkers[i];
+        for (key in obj.customHover) {
+            obj[key] = obj.customHover[key];
+        }
+        delete obj.customHover;
+    }
+
+    // item count
+    taMapObject.itemCount = json.query.results.span[0].strong;
+
+    return taMapObject;
+}
+
+function createMap(taMapObject, svgMarker, svgHand, styleMapMarker) {
+    // Create the Google Map
+    map = new google.maps.Map(d3.select("#map").node(), {
+        zoom: taMapObject.initialMapPosition.zoom+2,
+        center: new google.maps.LatLng(
+                taMapObject.initialMapPosition.lat,
+                taMapObject.initialMapPosition.lng ),
+        mapTypeId: google.maps.MapTypeId.STREET
+    });
+
+    // Create overlay
+    overlay = new google.maps.OverlayView();
+
+    var markerData = taMapObject.attractionMapMarkers;
+    markerData.reverse();  // to make higher rank attraction appended last
+    // Add the container when the overlay is added to the map.
+    overlay.onAdd = overlayOnAdd;
+
+    // Update address and latlng
+    if (styleMapMarker.flagUpdate) {
+        updateAttraction(taMapObject.attractionMapMarkers, overlay);
+    }
+
+    // Bind our overlay to the map
+    overlay.setMap(map);
+
+    // Routines
+    function overlayOnAdd() {
+
+        var padding = styleMapMarker.svgPadding;
+
+        var layer = d3.select(this.getPanes().overlayMouseTarget)
+                .append("div")
+                .attr("id", "attraction");
+
+        var layerEffect = d3.select(this.getPanes().overlayLayer)
+                .append("div")
+                .attr("id", "animation-effect");
+
+        // Set up scales
+        var markerColorScale = d3.scale.quantize()
+                .domain([markerData.length, 1])
+                .range(colorbrewer.YlOrRd[9].slice(2, -2));
+        var markerStrokeScale = d3.scale.quantize()
+                .domain([markerData.length, 1])
+                .range(colorbrewer.YlOrRd[9].slice(3));
+
+        // Draw current location
+        var totalHeight = styleMapMarker.currentLocation.totalHeight();
+        var totalWidth  = styleMapMarker.currentLocation.totalWidth();
+        var markerCurrentLoc = layer.append("svg:svg")
+                .attr("id", "current-location")
+                .attr("height", totalHeight)
+                .attr("width",  totalWidth)
+                .style("opacity", 0);
+
+        // Clone hand
+        markerCurrentLoc.append("g").node()
+                .appendChild(d3.select(svgHand).select("svg").node().cloneNode(true));
+        markerCurrentLoc.select("title").text("You");
+        var scaleString = "scale("+
+                styleMapMarker.currentLocation.ratio+","+
+                styleMapMarker.currentLocation.ratio+")"
+        markerCurrentLoc.select("g")
+                .attr("id", "current-location-hand")
+                .attr("transform", scaleString)
+                .style("opacity", 0.8)
+        // Draw base circle
+        var baseTranslateString = "translate("+totalWidth/2+","+totalHeight+")";
+        markerCurrentLoc.append("g")
+                .attr("id", "current-location-base")
+                .attr("transform", baseTranslateString)
+                .append("circle")
+                .attr("cx", 0)
+                .attr("cy", -styleMapMarker.currentLocation.baseR)
+                .attr("r" , styleMapMarker.currentLocation.baseR)
+                .style("fill", styleMapMarker.currentLocation.color);
+
+        // Animate current location marker
+        if (styleMapMarker.currentLocation.animationInterval!==Infinity) {
+            setInterval(function () {
+                d3.select("#current-location-hand")
+                        .transition()
+                        .duration(styleMapMarker.currentLocation.animationInterval / 4)
+                        .attr("transform", "translate(0," +
+                                (styleMapMarker.currentLocation.gap + styleMapMarker.currentLocation.baseR * 0.7) + ") " +
+                                scaleString)
+                        .transition()
+                        .duration(styleMapMarker.currentLocation.animationInterval / 4)
+                        .attr("transform", scaleString);
+                d3.select("#current-location-base")
+                        .transition()
+                        .delay(styleMapMarker.currentLocation.animationInterval * 0.07)
+                        .duration(styleMapMarker.currentLocation.animationInterval * 0.180)
+                        .attr("transform", baseTranslateString + " scale(1.3," + 0.7 + ")")
+                        .transition()
+                        .duration(styleMapMarker.currentLocation.animationInterval * 0.6)
+                        .ease("bounce")
+                        .attr("transform", baseTranslateString);
+            }, styleMapMarker.currentLocation.animationInterval);
+        }
+
+        // Set up current location event
+        var currentLocationDOM = d3.select("#current-location").node();
+        google.maps.event.addDomListener(currentLocationDOM, "click", function(e) {
+            // Available: taMapObject
+            queryDurationToAttraction(taMapObject.attractionMapMarkers,
+                    styleMapMarker.currentLocation, nearby.parameters.travelMode, overlay)
+
+        })
+
+
+        //____________________________________________________________________________
+        // Set up draw handler
+        overlay.draw = function() {
+            var marker = layer.selectAll("svg.marker")
+                    .data(markerData)
+                    .enter()  // only for new data
+                    .append("svg:svg")
+                    .attr("class", "marker")
+                    .attr("height", styleMapMarker.height+styleMapMarker.padding*2)
+                    .attr("width", styleMapMarker.width+styleMapMarker.padding*2);
+
+            drawDuration();
+
+            // Place map attraction markers
+            var gX = styleMapMarker.padding;//-styleMapMarker.width;
+            var gY = styleMapMarker.padding;//-styleMapMarker.height/2;
+            var ratio = styleMapMarker.ratio;
+            var eyeTranslate = "translate("+styleMapMarker.svgCx+", "+styleMapMarker.svgCy+")";
+
+            marker.each(function (d) {
+                d3.select(this).node()
+                        .appendChild(d3.select(svgMarker).select("g").node().cloneNode(true));
+                d3.select(this).select("g > title").text(d.title + "\nRanked #" +
+                        d.num + " of "+taMapObject.itemCount +" attractions");
+                var d3g = d3.select(this).select("g");
+                d3g.append("g")
+                        .attr("class", "eye")
+                        .attr("transform", eyeTranslate)
+                        .node()
+                        .appendChild(d3.select(this).select("circle").node());
+                d3g.select("circle")
+                        .attr("cx", 0)
+                        .attr("cy", 0)
+                        .style("fill", styleMapMarker.eyeColor);
+
+                d3g.attr("class", "marker-drop")
+                        .attr("transform", "translate(" + (gX) + "," + (gY)
+                                + ") scale(" + ratio + "," + ratio + ")")
+                        .style("cursor", "pointer")
+                        .select("path")
+                        .style("fill", function (d) {
+                            d.color = markerColorScale(d.num);
+                            return d.color;
+                        })
+                        .style("stroke", function (d) {
+                            d.lineColor = d3.hsl(markerColorScale(d.num)).darker(0.6);   //markerStrokeScale(d.num);
+                            return d.lineColor;
+                        })
+                        .style("stroke-width", styleMapMarker.strokeWidth);
+
+                // blink effect
+                var singleMarker = this;
+                if (styleMapMarker.blink.interval!==Infinity) {
+                    setInterval(function () {
+                        setTimeout(function () {
+                            var eyeCloseRatio = 0;
+                            if (Math.random() < styleMapMarker.blink.ratio) {
+                                d3.select(singleMarker).select(".eye")//.select("circle")
+                                        .transition()
+                                        .duration(styleMapMarker.blink.duration)
+                                        .ease("exp")
+                                        .attr("transform", eyeTranslate + " scale(1, " + eyeCloseRatio + ")")
+                                        .transition()
+                                        .ease("bounce")
+                                        .attr("transform", eyeTranslate + " scale(1, " + (1) + ")");
+                            }
+                        }, Math.random() * styleMapMarker.blink.interval);
+                    }, styleMapMarker.blink.interval);
+                }
+            });
+
+
+            // Add a circle
+//            marker.append("svg:circle")
+//                    .attr("class", "marker-circle")
+//                    .attr("r", 4.5)
+//                    .attr("cx", padding)
+//                    .attr("cy", padding);
+//
+//
+              // Add a label
+//            marker.append("svg:text")
+//                    .attr("x", padding + 7)
+//                    .attr("y", padding)
+//                    .attr("dy", ".31em")
+//                    .text(function(d) { return d.title; });
+
+            // Place current location marker
+            if (styleMapMarker.currentLocation.flag) {
+                function getCurrentLocation(callback) {
+                    function errorCallback(posError) {
+                        // do nothing;
+                        pr("here: errorCallback");
+                    }
+                    var option = {
+                        enableHighAccuracy: false,
+                        timeOut: Infinity,
+                        maximumAge: styleMapMarker.currentLocation.maximumAge
+                    };
+                    return navigator.geolocation.getCurrentPosition(callback, errorCallback, option)
+                }
+                function animateCurrenttLocationUpdateWrapper(pos) {
+                    styleMapMarker.currentLocation.lat = pos.coords.latitude;
+                    styleMapMarker.currentLocation.lng = pos.coords.longitude;
+                    styleMapMarker.currentLocation.accuracy = pos.coords.accuracy;
+                    styleMapMarker.currentLocation.flagReady = true;
+                    // Set center
+
+                    // Trigger nearby
+                    if (!nearby.signals.setCenterAlready) {
+                        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+                        nearby.signals.setCenterAlready = true;
+                    }
+                    return animateCurrentLocationUpdate(overlay);
+                }
+
+                queue().defer(getCurrentLocation)
+                        .await(animateCurrenttLocationUpdateWrapper);
+            }
+            else {  // emulated location
+
+                map.setCenter(new google.maps.LatLng(
+                        styleMapMarker.currentLocation.lat,
+                        styleMapMarker.currentLocation.lng));
+                styleMapMarker.currentLocation.flagReady = true;
+                nearby.signals.setCenterAlready = true;
+
+                function wrapper() {
+                    console.log("here");
+                    animateCurrentLocationUpdate(overlay)
+                };
+
+                setTimeout(wrapper, 1000);
+            }
+
+            // Update marker location overlay on map
+            animateMarkerLocationUpdate(this, styleMapMarker);
+
+
+
+            marker.each(function(d,i) {
+                var markerDropDOM = d3.select(this).select("g.marker-drop").node();
+                var latlng = new google.maps.LatLng(d.lat, d.lng);
+
+                var content = "<div class='infowindow-title'>" + d.title + "</div>"+
+                        (taMapObject.attractionMapMarkers[i].address!==undefined ?
+                                taMapObject.attractionMapMarkers[i].address + "<br>" : "") +
+                        "Ranked #<strong>" + d.num + "</strong> of " + taMapObject.itemCount +
+                        " attractions";
+
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: content,
+                    position: latlng,
+                    pixelOffset: new google.maps.Size(0, -styleMapMarker.height)
+                });
+
+                google.maps.event.addDomListener(markerDropDOM, "mouseover", function(e) {
+                    infowindow.open(map);
+                    d3.select(this)
+                            .style("opacity", 1);
+                })
+                google.maps.event.addDomListener(markerDropDOM, "mouseout", function(e) {
+                    infowindow.close();
+                    d3.select(this)
+                            .style("opacity", (nearby.signals.durationCircleReady?styleMapMarker.opacity:1));
+                })
+
+            });
+
+            styleMapMarker.firstTime.flag = false;  // drop effect only for 1st time
+
+        }  // End of overlay.draw
+        //________________________________________________________________________________
+
+        // Add click action
+//        console.log("here click");
+//        console.log(marker);
+//        marker.selectAll("svg").on("click", function(){alert(this)});
+//
+//        google.maps.event.addListener(layer, "click", function(e) {
+//            alert("click on overlay!");
+//        });
+//        google.maps.event.addDomListener(layer.node, 'click', function() {
+//            google.maps.event.trigger(overlay, 'click');
+//        });
+
+//                    console.log(d3.selectAll(".marker-drop"));
+
+
+
+//                    google.maps.event.addDomListener(marker.selectAll("svg"))
+
+
+
+
+
+    }
+
+    // For getting addresses and accurate latlng
+    function updateAttraction(attractions, overlay) {
+
+        var yql = 'https://query.yahooapis.com/v1/public/yql?q=';
+        var urlMain = 'http://www.tripadvisor.com';
+        var xpath = "//h1[@id='HEADING'] | //address/span/span/span";
+        var q = queue();
+
+        attractions.forEach(function(attraction){
+            // Queue query function
+            q.defer(getAddressLatLng, attraction);
+        });
+        q.awaitAll(getAddressLatLngReady);
+
+        // Called for every attraction
+        function getAddressLatLng(attraction, callback) {
+            var yqlQuery = yql+getQueryCommand("*", urlMain + attraction.titleUrl, xpath);
+            d3.json(yqlQuery, function(error, json){
+                if (error) {
+                    return callback(error, attraction);
+                }
+                // Get site name and address
+                var obj = json.query.results;
+                var street = "";
+                var locality = "";
+                obj.span = (obj.span.length ? obj.span : [obj.span]);  // wrap as an array if necessary
+                for (var i=0; i<obj.span.length; ++i) {
+                    var span = obj.span[i];
+                    switch (span.class) {
+                        case "street-address":
+                            street = span.content;
+                            break;
+                        case "locality":
+                            locality = span.span[0] + ", " + span.span[1];
+                            if (span.span.length == 3) {
+                                locality += " " + span.span[2];
+                            }
+                            break;
+                        default:
+                            ;
+                    }
+                }
+                attraction.address = (street ? street + ", " : "");
+                attraction.locality = locality;
+                callback(null, attraction);
+
+            });
+
+        }
+
+        // Called once all queries are ready
+        function getAddressLatLngReady(error, attractions) {
+            // Get LatLng info from Google Map
+            attractions = (attractions.length ? attractions : [attractions]);
+            var geocoder = new google.maps.Geocoder();
+            var queryInteval = 800;
+            function curryQuery(geocoder, attraction) {
+                return function() {
+                    getLatLngGeocoderQuery(geocoder, attraction);
+                }
+            }
+            var q = queue();
+
+            function geocoderQueryDone() {
+                ;
+            }
+            for (var i=0; i<attractions.length; ++i) {
+                q.defer(function(callback){
+                    setTimeout(
+                            curryQuery(geocoder, attractions[i]),
+                                    queryInteval*i);
+                    callback(null);
+                });
+            }
+            q.awaitAll(geocoderQueryDone);
+
+            // geocoder query function
+            function getLatLngGeocoderQuery(geocoder, attraction) {
+                console.log("Location query for " + attraction.title);
+                var lat, lng;
+                var distanceThreshold = 0.3;  // update latlng when within 100m
+                var nameAddress = attraction.title + ", "
+                        + attraction.locality;
+                geocoder.geocode( { 'address': nameAddress}, function(results, status) {
+                    switch(status) {
+                        case google.maps.GeocoderStatus.OK:
+                            lat = results[0].geometry.location.lat().toFixed(9);
+                            lng = results[0].geometry.location.lng().toFixed(9);
+                            if (getDistanceFromLatLngInKm(
+                                    lat, lng, attraction.lat, attraction.lng) < distanceThreshold) {
+                                attraction.lat = lat;
+                                attraction.lng = lng;
+
+                                animateMarkerLocationUpdate(overlay, styleMapMarker, true);
+
+                                console.log("               to (" + lat + ", " + lng + ")");
+                            }  // otherwise discard the info from google map
+                            break;
+                        case google.maps.GeocoderStatus.ZERO_RESULTS:
+                            console.warn("Geocoder: Returned no results");
+                            break;
+                        case google.maps.GeocoderStatus.OVER_QUERY_LIMIT:
+                            console.warn("Geocoder: Exceeded query quota");
+                            break;
+                        case google.maps.GeocoderStatus.REQUEST_DENIED:
+                            console.warn("Geocoder: Request denied");
+                            break;
+                        case google.maps.GeocoderStatus.INVALID_REQUEST:
+                            console.warn("Geocoder: Invalid query");
+                            break;
+                        case google.maps.GeocoderStatus.UNKNOWN_ERROR:
+                            console.warn("Geocoder: Over query limit");
+                            break;
+                        default:
+                            console.warn("Geocoder: Caught an unknown error");
+                    }
+                });
+            }
+        }
+    }  // End of updateAttraction
+
+
+    function animateMarkerLocationUpdate(overlay, style, flagCalibration) {
+        flagCalibration = (flagCalibration!==undefined ? flagCalibration : false);  // default
+
+        var padding = style.padding;
+        var mapMarkerDropDistance = style.firstTime.dropDistance;
+        var mapMarkerFirstTimeDropInterval = style.firstTime.dropInterval;
+        var mapMarkerDroppingEffect = style.firstTime.dropEffect;
+        var millisecond;
+        if (style.firstTime.flag) {
+            millisecond = style.firstTime.transitionDuration;
+        }
+        else if (flagCalibration) {
+            millisecond = style.calibrationDuration;
+        }
+        else {
+            millisecond = 0;
+        }
+        var length = d3.selectAll("#map svg")[0].length;
+
+        d3.selectAll(".marker")
+                .each(function(d, i) {
+                    d = new google.maps.LatLng(d.lat, d.lng);  // Make d a google map LatLng obj
+                    d = overlay.getProjection().fromLatLngToDivPixel(d); // Make d a pair of pixels
+
+                    var svgLeft = d.x - style.width/2 - padding;
+                    var svgTop  = d.y - style.height - padding;
+
+                    if (style.firstTime.flag) {
+                        d3.select(this)
+                                .style("left", (svgLeft) + "px")
+                                .style("top" , (svgTop - mapMarkerDropDistance) + "px")
+                                .style("opacity", 0)
+                                .transition()
+                                .delay(millisecond/ length *(length-i) * mapMarkerFirstTimeDropInterval)
+                                .duration(millisecond)
+                                .ease(mapMarkerDroppingEffect)
+                                .style("top" , (svgTop) + "px")
+                                .style("opacity", 1);
+                    }
+                    else {  // not first time
+                        d3.select(this).transition()
+                                .duration(millisecond)
+                                .style("left", (svgLeft) + "px")
+                                .style("top", (svgTop) + "px");
+                    }
+                });
+
+    }  // End of updateMarkerLocation
+
+    function animateCurrentLocationUpdate(overlay) {
+
+//        if (styleMapMarker.currentLocation.flag && styleMapMarker.currentLocation.flagReady) {
+        if (styleMapMarker.currentLocation.flagReady) {
+            var latlng = new google.maps.LatLng(styleMapMarker.currentLocation.lat, styleMapMarker.currentLocation.lng);
+            var mapPos = overlay.getProjection().fromLatLngToDivPixel(latlng);
+
+            d3.select("#current-location")
+                    .transition()
+                    .style("left", (mapPos.x-styleMapMarker.currentLocation.totalWidth()/2) + "px")
+                    .style("top",  (mapPos.y-styleMapMarker.currentLocation.totalHeight()+
+                            styleMapMarker.currentLocation.baseR) + "px")
+                    .style("opacity", 1);
+
+            // Aura effect
+            var deg = getDegreeFromKm(styleMapMarker.currentLocation.accuracy*0.001, styleMapMarker.currentLocation.lat);
+            var latlngR = new google.maps.LatLng(styleMapMarker.currentLocation.lat+deg, styleMapMarker.currentLocation.lng);
+            var mapPosR = overlay.getProjection().fromLatLngToDivPixel(latlngR);
+            var auraRadius = Math.abs(mapPos.y-mapPosR.y) * styleMapMarker.currentLocation.auraRadius;
+            var padding = styleMapMarker.currentLocation.auraPadding;
+
+            if (!d3.select("#aura")[0][0]) {
+                // Create an aura
+                d3.select("#animation-effect")
+                        .append("svg:svg")
+                        .attr("id", "aura")
+                        .attr("height", auraRadius*2+padding*2)
+                        .attr("width", auraRadius*2+padding*2)
+                        .style("left", (mapPos.x-auraRadius-padding)+"px")
+                        .style("top", (mapPos.y-auraRadius-padding)+"px")
+                        .append("svg:circle")
+                        .attr("cx", auraRadius+padding)
+                        .attr("cy", auraRadius+padding)
+                        .attr("r", auraRadius)
+                        .style("fill", styleMapMarker.currentLocation.auraColor)
+                        .style("opacity", 0.2)
+                        .style("stroke", styleMapMarker.currentLocation.auraStrokeColor)
+                        .style("stroke-width", "1px");
+                d3.select("#animation-effect")
+                        .append("svg:svg")
+                        .attr("id", "aura-circle")
+                        .attr("height", auraRadius*2+padding*2)
+                        .attr("width", auraRadius*2+padding*2)
+                        .style("left", (mapPos.x-auraRadius-padding)+"px")
+                        .style("top", (mapPos.y-auraRadius-padding)+"px")
+                        .append("svg:circle")
+                        .attr("cx", auraRadius+padding)
+                        .attr("cy", auraRadius+padding)
+                        .attr("r", 0)
+                        .style("fill", "none")
+                        .style("opacity", 0.6)
+                        .style("stroke", styleMapMarker.currentLocation.auraStrokeColor)
+                        .style("stroke-width", "1px");
+
+                styleMapMarker.currentLocation.intervalID = setInterval(function(){
+                    animateAura(auraRadius, styleMapMarker.currentLocation.animationInterval);
+                }, styleMapMarker.currentLocation.animationInterval);
+            }
+            else {
+                clearInterval(styleMapMarker.currentLocation.intervalID);
+                d3.select("#aura")
+                        .attr("height", auraRadius*2+padding*2)
+                        .attr("width", auraRadius*2+padding*2)
+                        .style("left", (mapPos.x-auraRadius-padding)+"px")
+                        .style("top", (mapPos.y-auraRadius-padding)+"px")
+                        .select("circle")
+                        .attr("cx", auraRadius+padding)
+                        .attr("cy", auraRadius+padding)
+                        .attr("r", auraRadius)
+                d3.select("#aura-circle")
+                        .attr("height", auraRadius*2+padding*2)
+                        .attr("width", auraRadius*2+padding*2)
+                        .style("left", (mapPos.x-auraRadius-padding)+"px")
+                        .style("top", (mapPos.y-auraRadius-padding)+"px")
+                        .select("circle")
+                        .attr("cx", auraRadius+padding)
+                        .attr("cy", auraRadius+padding)
+                        .attr("r", 0)
+                styleMapMarker.currentLocation.intervalID = setInterval(function(){
+                    animateAura(auraRadius, styleMapMarker.currentLocation.animationInterval);
+                },  styleMapMarker.currentLocation.animationInterval);
+            }
+            function animateAura(radius, duration){
+                d3.select("#aura-circle").select("circle")
+                        .attr("r", 0)
+                        .transition()
+                        .delay(duration*0.38)
+                        .duration(duration*0.5)
+                        .attr("r", radius);
+            }
+        }
+    }
+}
+
+</script>
+</html>

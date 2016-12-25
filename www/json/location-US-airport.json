@@ -1,0 +1,209 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "JFK"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    40.6428936,-73.785808
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "LaGuarida (LGA)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    40.7764114,-73.8722322
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Dallas/Fort Worth International Airport (DFW)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.8741486,-96.9613357
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Chicago Midway International Airport (MDW)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.7865124,-87.752494
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Chicago O'Hare International Airport (ORD)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.9798901,-87.9083783
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Minneapolis−Saint Paul International Airport (MSP)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    44.8808097,-93.2183898
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "San Francisco International Airport (SFO)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.6792433,-122.3743534
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Los Angeles International Airport (LAX)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    33.9428713,-118.404631
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Philadelphia International Airport (PHL)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    39.5219119,-80.8935722
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Portland International Airport (PDX)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    45.553252,-122.5903274
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Victoria International Airport (YYJ)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    48.6469593,-123.4298286
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Seattle-Tacoma International Airport (SEA)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    47.4551352,-122.3186167
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "San Diego International Airport (SAN)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.7334398,-117.1911408
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "George Bush Intercontinental Airport (IAH)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    29.836506,-95.6306645
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sacramento International Airport (SMF)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.6925757,-121.5907799
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Denver International Airport (DEN)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    39.8608368,-104.6727479
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Dulles International Airport (IAD)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.9750736,-77.4567831
+                ]
+            }
+        }
+    ]
+}

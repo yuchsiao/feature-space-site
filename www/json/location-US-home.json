@@ -1,0 +1,61 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Cambridge",
+                "description": "for my PhD",
+                "date": "2008-2014"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    42.3595275,-71.1016473
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Hyde Park",
+                "description": "for my bunny",
+                "date": "2012-2015"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.7886345,-87.5900348
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "UC Davis",
+                "description": "for my bunny",
+                "date": "2006-2012"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.540461, -121.754498
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Hillsboro",
+                "description": "for an internship",
+                "date": "2012"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    45.522216,-122.890908
+                ]
+            }
+        }
+    ]
+}

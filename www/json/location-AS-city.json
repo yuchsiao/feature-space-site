@@ -1,0 +1,339 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "枋寮 Fangliao",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.364216, 120.596946
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "台東 Taitung",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.7519529,121.1136088
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "花蓮 Hualian",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.9943228,121.6024376
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "頭城 Toucheng",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.8986586,121.8566876
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "宜蘭 Yilan",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.7488791,121.7586106
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "桃園 Taoyuan",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.9971709,121.2959895
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "新竹 Hsinchu",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.7847717,120.9560272
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "雲林 Yunlin",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.6743232,120.4345918
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "烏日 Wuri",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.0822292,120.6224444
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "台中",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.1556678,120.6663926
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "永康 Yongkang",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.0291532,120.2509307
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "台南 Tainan",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.997144,120.212966
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "龜山島 Guishan Island",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.8419439,121.9516667
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "香港 Hong Kong",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.3700555,114.1535941
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "深圳 Shenzhen",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.5551603,114.0538788
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "寧波北倫 Beilun, Ningbo",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    29.8498634,121.9055742
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "東京 Tokyo",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.7015227,139.7092051
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "京都 Kyoto",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.0061,135.76095
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "札幌 Sapporo",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    43.05945,141.3705
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "小樽 Otaru",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    43.1503738,141.0686849
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "登別 Noboribetsu",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    42.4532882,141.080249
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "洞爺湖 Toyako",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    42.5651171,140.8221453
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "函館市 Hakodate",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.8596703,140.9399629
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "長沙 Changsha",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.1761294,113.0245972
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        }
+    ]
+}

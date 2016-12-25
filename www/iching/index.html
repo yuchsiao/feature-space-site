@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-tw">
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+    <title>好背易經</title>
+</head>
+<style>
+    #display {
+        display: block;
+        position: fixed;
+        left: 50%;
+        margin-left: -44px;
+        padding-top: 0px;
+        font-size: 48pt;
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 900;
+        -webkit-writing-mode: vertical-rl;
+        writing-mode: vertical-rl;
+    }
+    ruby {
+        -webkit-writing-mode: vertical-rl;
+        writing-mode: vertical-rl;
+    }
+    rt {
+        font-size: 14px;
+        font-weight: bolder;
+        /*margin-left: -100px;*/
+        /*padding-left: -100px;*/
+        letter-spacing: -10px;
+    }
+</style>
+<body>
+<div id="display"></div>
+</body>
+<script>
+    var trigram = ['乾', '兌', '離', '震', '巽', '坎', '艮', '坤'];
+    var image = ['天', '澤', '火', '雷', '風', '水', '山', '地'];
+    var hexagram = [
+        ['乾'  , '夬'  , '大有', '大壯', '小畜', '需'  , '大畜', '泰'],
+        ['履'  , '兌'  , '睽'  , '歸妹', '中孚', '節'  , '損'  , '臨'],
+        ['同人', '革'  , '離'  , '豐'  , '家人', '既濟', '賁'  , '明夷'],
+        ['無妄', '隨'  , '噬嗑', '震'  , '益'  , '屯'  , '頤'  , '復'],
+        ['姤'  , '大過', '鼎'  , '恆'  , '巽'  , '井'  , '蠱'  , '升'],
+        ['訟'  , '困'  , '未濟', '解'  , '渙'  , '坎'  , '蒙'  , '師'],
+        ['遯'  , '咸'  , '旅'  , '小過', '漸'  , '蹇'  , '艮'  , '謙'],
+        ['否'  , '萃'  , '晉'  , '豫'  , '觀'  , '比'  , '剝'  , '坤']
+    ];
+    var hexagram_zhuyin = [
+        [''  , 'ㄍㄨㄞˋ'  , '', '', '', ''  , '', ''],
+        [''  , ''  , 'ㄎㄨㄟˊ'  , '', '', ''  , ''  , ''],
+        ['', ''  , ''  , ''  , '', '', 'ㄅㄧˋ'  , ''],
+        ['', ''  , '', ''  , ''  , ''  , ''  , ''],
+        ['ㄍㄡˋ'  , '', ''  , ''  , ''  , ''  , 'ㄍㄨˇ'  , ''],
+        [''  , ''  , '', ''  , ''  , ''  , ''  , ''],
+        ['ㄉㄨㄣˋ'  , 'ㄒ｜ㄢˊ'  , ''  , '', ''  , 'ㄐㄧㄢˇ'  , ''  , ''],
+        [''  , ''  , ''  , ''  , ''  , 'ㄅㄧˋ'  , ''  , '']
+    ];
+    var answer = '';
+
+    (function(){
+        var display = document.getElementById('display');
+        clickButtonNext();
+
+        display.addEventListener('click', clickButtonNext, true);
+    })();
+
+    function clickButtonNext() {
+        do {  // avoid trivial cases
+            var index1 = Math.floor(Math.random()*image.length);
+            var index2 = Math.floor(Math.random()*image.length);
+        } while(index1==index2);
+
+        display.innerHTML += answer;
+
+        if (answer=='') {  // first run
+            showNextQuestion();
+        }
+        else {
+            setTimeout(showNextQuestion, 1000);
+        }
+
+        function showNextQuestion() {
+            display.innerHTML = image[index1]+image[index2];
+            answer = '<ruby>'+
+                     hexagram[index2][index1]+'<rt>'+hexagram_zhuyin[index2][index1]+'</rt></ruby>';
+        }
+    }
+
+</script>
+</html>

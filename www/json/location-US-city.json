@@ -1,0 +1,341 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Atlanta",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    33.7677129,-84.420604
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Boston",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    42.3133734,-71.057157
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Portland",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    45.5424364,-122.654422
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Beaverton",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    45.4846403,-122.8054741
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "San Diego",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.8245525,-117.0951632
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "San Francisco",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.7577,-122.4376
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sunnyvale",
+                "description": "",
+                "date": "2014-01"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.3897961,-122.0241209
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Palo Alto",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.42565,-122.13535
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Fremont",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.5293864,-121.9992648
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Berkeley",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.875947,-122.2806297
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Oakland",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.7919584,-122.2287941
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Monterey",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    36.5943789,-121.8674989
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "New York",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    40.7056308,-73.9780035
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Seattle",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    47.614848,-122.3358423
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bellevue",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    47.5977555,-122.1550521
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Port Angeles",
+                "description": "",
+                "date": "2012-"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    48.1151421,-123.4643151
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Victoria",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    48.4266797,-123.3584175
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bar Harbor",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    44.3760249,-68.2866853
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Salem",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    42.5155954,-70.9076852
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Rockport",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    42.6594046,-70.608776
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Mayflower II Museum, Plymouth",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.9598092,-70.6621742
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sacramento",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.5615405,-121.4429125
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Flushing",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    40.7655236,-73.8371321
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sausalito",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.858418,-122.4946367
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,72 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Jungfraujoch",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    46.547282,7.98353
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Neuschwanstein Castle",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    47.5577396,10.7498397
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "Hohenschwangau Castle",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    47.5578047,10.7485523
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        },        {
+            "type": "Feature",
+            "properties": {
+                "name": "",
+                "description": "",
+                "date": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+
+                ]
+            }
+        }
+    ]
+}
